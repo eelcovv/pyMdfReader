@@ -39,11 +39,11 @@ Note that the data is stored in a pandas data frame 'header_object.data'
 Examples
 ========
 
-A recipe to use the package can be found here.
+* Loading and Plotting MDF files: `example_mdf`_ or `example_mdf_rtd`_
 
-.. _example: html:: example/example_mdf_reader.html
+.. _example_mdf: docs/_static/example_mdf_reader.html
+.. _example_mdf_rtd: https://pymdfreader.readthedocs.io/en/latest/_static/example_filtering.html
 
-* Loading and Plotting MDF files: example_
 
 Unit Test
 =========

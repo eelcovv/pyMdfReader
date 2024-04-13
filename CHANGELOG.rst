@@ -2,7 +2,7 @@
 Changelog
 =========
 
-Version 0.1.1
+Version 0.1.2
 =============
 
 - First release version of pyMdfReader
