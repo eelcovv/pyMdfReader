@@ -1,34 +1,3 @@
-.. These are examples of badges you might want to add to your README:
-please update the URLs accordingly
-
-    .. image:: https://api.cirrus-ci.com/github/<USER>/pyMdfReader.svg?branch=main
-        :alt: Built Status
-        :target: https://cirrus-ci.com/github/<USER>/pyMdfReader
-    .. image:: https://readthedocs.org/projects/pyMdfReader/badge/?version=latest
-        :alt: ReadTheDocs
-        :target: https://pyMdfReader.readthedocs.io/en/stable/
-    .. image:: https://img.shields.io/coveralls/github/<USER>/pyMdfReader/main.svg
-        :alt: Coveralls
-        :target: https://coveralls.io/r/<USER>/pyMdfReader
-    .. image:: https://img.shields.io/pypi/v/pyMdfReader.svg
-        :alt: PyPI-Server
-        :target: https://pypi.org/project/pyMdfReader/
-    .. image:: https://img.shields.io/conda/vn/conda-forge/pyMdfReader.svg
-        :alt: Conda-Forge
-        :target: https://anaconda.org/conda-forge/pyMdfReader
-    .. image:: https://pepy.tech/badge/pyMdfReader/month
-        :alt: Monthly Downloads
-        :target: https://pepy.tech/project/pyMdfReader
-    .. image:: https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter
-        :alt: Twitter
-        :target: https://twitter.com/pyMdfReader
-
-.. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
-    :alt: Project generated with PyScaffold
-    :target: https://pyscaffold.org/
-
-|
-
 ===========
 pyMdfReader
 ===========

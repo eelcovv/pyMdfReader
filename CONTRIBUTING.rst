@@ -265,7 +265,6 @@ on PyPI_, the following steps can be used to release a new version for
 
 
 .. <-- start -->
-.. todo:: Please review and change the following definitions:
 
 .. |the repository service| replace:: GitHub
 .. |contribute button| replace:: "Create pull request"
