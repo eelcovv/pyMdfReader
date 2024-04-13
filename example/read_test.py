@@ -54,9 +54,9 @@ header_object.set_column_selection(filter_list=["^BALDER", "HZ3.*A[XYZ]"])
 header_object.import_data()
 print(header_object.data.head(5))
 
-# Note that you can also automaticall calculate the relative time in s wrt the start if
+# Note that you can also automatically calculate the relative time in s wrt the start if
 # the *set_relative_time_column* flag is set to true.
-# In that case, a column with the name *time_r* is create which holds the relative time
+# In that case, a column with the name *time_r* is created which holds the relative time
 # Alternatively you can make your own choice of columns. We will import again
 header_object = mdf.MDFParser(file_name, import_data=False)
 
@@ -65,7 +65,7 @@ columns_to_include = []
 columns_to_exclude = []
 
 # Here, you can control how to read the columns. If max_columns = None, read the named
-# selection. If a number is given, just read the columns in order they occur, starting
+# selection. If a number is given, read the columns in order they occur, starting
 # at the 'start_col' index and stopping as soon as max_columns is exceeded
 max_columns = None
 start_col = 0

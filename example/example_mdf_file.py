@@ -1,4 +1,8 @@
+import logging
+
 from mdf_reader import mdf_parser as mdf
+
+logging.basicConfig(level=logging.INFO)
 
 data_file = "../data/AMS_BALDER_160927T143000.mdf"
 
