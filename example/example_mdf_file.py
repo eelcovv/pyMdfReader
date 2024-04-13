@@ -1,4 +1,4 @@
-from mlab_mdfreader import mdf_parser as mdf
+from mdf_reader import mdf_parser as mdf
 
 data_file = "../data/AMS_BALDER_160927T143000.mdf"
 

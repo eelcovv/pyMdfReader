@@ -13,7 +13,7 @@ only a mdf_header object with the call
 mdf_header = mdf.MDFParser(file_name, import_data=False)
 
 Then we have information on all the data columns which are available. Based on the
-'include_columns' and 'exclude_columens', we can make a selection of columns we want to
+'include_columns' and 'exclude_columns', we can make a selection of columns we want to
 read, which is done with the second call to the MDFParser
 
 @author: Eelco van Vliet
@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 
 import mdf_reader.mdf_parser as mdf
 
-logger = logging.basicConfig()
+logging.basicConfig()
 
 
 def print_title(title):
@@ -79,7 +79,7 @@ if max_columns is None:
     print("label list: {}".format(label_list))
     print("group list: {}".format(group_list))
 else:
-    # In this section we just add all columns to include in order they appear up to a
+    # In this section, we just add all columns to include in order they appear up to a
     # maximum number of columns
     n_col = 0
     for cnt, obj in enumerate(header_object.dataset_records):
