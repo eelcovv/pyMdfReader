@@ -47,7 +47,7 @@ Examples
     _static/example_mdf_reader.html
 
 .. _example_mdf_rtd:
-    https://pymdfreader.readthedocs.io/en/latest/_static/example_filtering.html
+    https://pymdfreader.readthedocs.io/en/latest/_static/example_mdf_reader.html
 
 
 Unit Test
