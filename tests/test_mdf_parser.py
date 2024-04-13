@@ -8,7 +8,7 @@ from numpy.testing import assert_equal
 import mdf_reader.mdf_parser as mdf
 
 __author__ = "Eelco van Vliet"
-__license__ = "none"
+__license__ = "MIT"
 
 DATA_DIR = "data"
 FILE_NAMES = ["AMS_BALDER_110225T233000_UTC222959.mdf", "BARGE_150409T145810.mdf"]
