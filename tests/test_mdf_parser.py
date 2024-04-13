@@ -1,30 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import os
 import pickle
-import sys
 
 from numpy.testing import assert_equal
 
-try:
-    # This import is used when running python setup.py test or when running from within
-    # pycharm
-    print(sys.path)
-    import mlab_mdfreader.mdf_parser as mdf
-except ImportError:
-    # If the import fails we are running this script from the command line and need to
-    # include the current path
-    real_path = os.path.realpath(
-        os.path.join(os.path.dirname(__file__), "../mlab_mdfreader")
-    )
-    sys.path.insert(0, real_path)
-    print("Import mlab_mdfreader from {}".format(sys.path[0]))
-    # The double mlab_mdfreader is needed in case we are running the script from the
-    # command line
-    import mlab_mdfreader.mlab_mdfreader.mdf_parser as mdf
-
-    sys.path.pop()
+import mdf_reader.mdf_parser as mdf
 
 __author__ = "Eelco van Vliet"
 __license__ = "none"
@@ -100,7 +81,7 @@ def test_data():
 
 def test_data_selection():
     """
-    test importing a selection of data base on a list of regular expression
+    test importing a selection of the data using a list of regular expression
     """
     for file_name in FILE_NAMES:
 
@@ -124,7 +105,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # in case we run the test_mdf_parser as a script from the command line like
+    # In case we run the test_mdf_parser as a script from the command line like
     # python.exe tests/test_mdf_parser.
     # We call the main routine which will call the routine to create the pkl data from
     # the header.
