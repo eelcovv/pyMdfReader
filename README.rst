@@ -41,7 +41,7 @@ Examples
 
 * Loading and Plotting MDF files: `example_mdf`_ or `example_mdf_rtd`_
 
-.. _example_mdf: docs/_static/example_mdf_reader.html
+.. _example_mdf: _static/example_mdf_reader.html
 .. _example_mdf_rtd: https://pymdfreader.readthedocs.io/en/latest/_static/example_filtering.html
 
 
