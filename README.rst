@@ -39,7 +39,9 @@ Note that the data is stored in a pandas data frame 'header_object.data'
 Examples
 ========
 
-* Loading and Plotting MDF files: `example_mdf`_ or `example_mdf_rtd`_
+* See here for examples of filtering with the *SignalFilters* package: `example_mdf`_
+  or `example_mdf_rtd`_
+
 
 .. _example_mdf:
     _static/example_mdf_reader.html
