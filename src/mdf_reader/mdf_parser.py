@@ -342,7 +342,7 @@ class MDFParser(object):
         self.log.setLevel(log_level)
 
         self.header = None
-        self.data = None  # This Pandas dataframe will contain all the data at the end
+        self.data = None  # The dataframe will contain all the data at the end
 
         mdf_file_base, extension = splitext(mdf_file)
         if not bool(match(MDF_EXTENSION, extension, IGNORECASE)):
@@ -470,9 +470,8 @@ class MDFParser(object):
         with open(self.dta_filename, "rb") as fp_dta:
             byte_array = fp_dta.read(n_frames_to_read * self.header.frame_size)
 
-        # create a pandas data frame and a numpy data array to store the current data
-        if self.data is None:
-            self.data = pd.DataFrame(index=list(range(n_frames_to_read)), columns=[])
+        data_columns = {}
+        date_time_column_name = None
 
         # Loop over all the data sets records and convert them from the binary array and
         # put them in the dataframe
@@ -487,63 +486,50 @@ class MDFParser(object):
             if self.exclude_columns is not None and record.name in self.exclude_columns:
                 continue
 
-            # ok, we can proceed.
+            if self.data is not None and record.name in self.data.columns:
+                _logger.debug(f"Column {record.name} was already imported. skipping")
+                continue
+
+            # Proceed with reading the data
             self.log.debug(
-                "Decoding data set nr {} : {}/{}  (format {})"
-                "".format(index, record.name, record.label, record.data_format)
+                f"Decoding data set nr {index} : {record.name}/{record.label}  "
+                f"(format {record.data_format})"
+            )
+            record_data = record.byte_to_ndarray(
+                byte_array=byte_array,
+                n_frames_to_read=n_frames_to_read,
+                frame_size=self.header.frame_size,
             )
 
-            # create an empty numpy array to store the converted data
-            np_data = np.empty(n_frames_to_read, record.data_format_numpy)
-
-            # loop over the data frames and convert the values of the current record
-            for i in range(n_frames_to_read):
-                ptr = record.frame_offset + i * self.header.frame_size
-                value = record.unpack_byte_array(
-                    byte_array[ptr : ptr + record.data_format_size], record.data_format
-                )
-                np_data[i] = value
-                self.log.debug(
-                    "Assigned {} -> {} ({} -> {})"
-                    "".format(value, np_data[i], type(value), type(np_data[i]))
-                )
-
-            # copy the numpy array in the Pandas data frame
+            # Copy the numpy array in the Pandas data frame
             if record.data_format == "ymdhms" and self.convert_datetime:
                 # convert the ymdhms integer into a datatime-index.
-                self.data[record.name] = convert_ymdhms_to_data_time(
-                    np_data,
+                date_time_index = convert_ymdhms_to_data_time(
+                    record_data,
                     self.time_record.sample_rate,
                     constant_sample_rate=self.constant_sample_rate,
                 )
-                new_columns = self.data.columns.values
-                index_of_column = None
-                for ii, name in enumerate(new_columns):
-                    if name == record.name:
-                        index_of_column = ii
-
-                if index_of_column is not None:
-                    new_columns[index_of_column] = self.date_time_label
-                self.data.columns = new_columns
+                record_data = date_time_index.values
                 record.name = self.date_time_label
-
-                # set the date time index as the index of the data frame
-                self.data.set_index(record.name, inplace=True)
-            else:
-                # Copy the current data array to the data frame
-                self.log.debug(
-                    "Copying data of type {} to {}".format(type(np_data), record.name)
-                )
-                try:
-                    self.data[record.name] = np_data
-                except (TypeError, KeyError):
-                    self.log.warning(
-                        "Failed to copy data for {} due to KeyError. Skipping this "
-                        "column".format(record.name)
-                    )
-                    continue
+                date_time_column_name = record.name
 
             record.loaded_data = True
+            data_columns[record.name] = record_data
+
+        # Done with the loop. Add all the data
+        data_to_add = pd.DataFrame.from_dict(data_columns)
+        if date_time_column_name is not None:
+            data_to_add = data_to_add.set_index(date_time_column_name, drop=True)
+
+        if self.data is None:
+            self.data = data_to_add
+        else:
+            # add new data to the data frame.
+            data_to_add.index = self.data.index
+            overlap = data_to_add.columns.intersection(self.data.columns)
+            if not overlap.empty:
+                _logger.warning("Overlapping columns detected. This should not happen")
+            self.data = pd.concat([self.data, data_to_add], axis=1)
 
         if self.convert_datetime and self.resample_data:
             # resampling is only required if the

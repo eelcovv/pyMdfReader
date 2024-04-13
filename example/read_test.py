@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 
 import mdf_reader.mdf_parser as mdf
 
-logging.basicConfig()
+logging.basicConfig(level=logging.INFO)
 
 
 def print_title(title):

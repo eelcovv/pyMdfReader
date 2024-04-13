@@ -8,7 +8,7 @@ data_file = "../data/AMS_BALDER_160927T143000.mdf"
 
 mdf_obj = mdf.MDFParser(data_file, set_relative_time_column=True, import_data=False)
 
-# this is the way the make a selectio of all acceleration channels
+# This is the way the make a selectio of all acceleration channels
 # The first regular expression in the list applies on the name field of the record.
 # The next regular expressions on the label fields.
 # First select all names
