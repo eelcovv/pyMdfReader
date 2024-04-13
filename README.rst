@@ -41,7 +41,9 @@ Examples
 
 A recipe to use the package can be found here.
 
-* Loading and Plotting MDF files: :download:`html <../example/example_mdf_reader.html>`
+.. _example: html:: example/example_mdf_reader.html
+
+* Loading and Plotting MDF files: example_
 
 Unit Test
 =========
