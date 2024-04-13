@@ -1,5 +1,5 @@
 .. These are examples of badges you might want to add to your README:
-   please update the URLs accordingly
+please update the URLs accordingly
 
     .. image:: https://api.cirrus-ci.com/github/<USER>/pyMdfReader.svg?branch=main
         :alt: Built Status
@@ -34,13 +34,65 @@ pyMdfReader
 ===========
 
 
-    Add a short description here!
+A reader for Micro lab MDF files
 
 
-A longer description of your project goes here...
+Description
+===========
+
+This module is used to read the micro lab MDF data files. An efficient mechanism is used to allow to make
+selection   of data columns.
+
+Example of usage:
+-----------------
+
+Read a MDF file as a whole
+
+.. code:: python
+
+    import mdf_reader.mdf_parser as mdf
+    data_file = "example_data_file.mdf"
+
+    header_object = mdf.MDFParser(data_file)
+    header_object.data.info()
+
+Read a selection of columns based on a filter
+
+.. code:: python
+
+    header_object = mdf.MDFParser(data_file, import_data=False)
+    header_object.set_column_selection(filter_list=["BALDER", "A[XYZ]"])
+    header_object.import_data()
+
+Note that the data is stored in a pandas data frame 'header_object.data'
 
 
-.. _pyscaffold-notes:
+Examples
+========
+
+A recipe to use the package can be found here.
+
+* Loading and Plotting MDF files: :download:`html <../example/example_mdf_reader.html>`
+
+Unit Test
+=========
+In order to run the standard unit test do::
+
+    tox
+
+Installation
+============
+
+To install the package run::
+
+    pip install pyMdfReader
+
+In case you want to run all the examples in a virtual environment you can also do::
+
+    pip install pyMdfReader[examples]
+
+which makes sure that a that also the package *matplotlib*, *seaborn* and *jupyter* are
+installed as well.
 
 Making Changes & Contributing
 =============================
