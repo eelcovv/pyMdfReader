@@ -402,9 +402,6 @@ class DataSetRecord(MDFBlock):
         version (int): verbosity level
         frame_offset (int): offset of the current frame
 
-    Methods:
-        byte_to_ndarray: Converts bytes to ndarray
-
     """
 
     def __init__(self, file_pointer, verbose=1):
